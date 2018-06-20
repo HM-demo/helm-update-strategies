@@ -1,0 +1,4 @@
+spec:
+ selector:
+    app: dotnet-bg
+    color: envColor

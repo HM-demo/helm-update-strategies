@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: dotnet
+ labels:
+  app: dotnet
+spec:
+ type: NodePort
+ ports:
+ - port: 8080
+   name: http
+ selector:
+   app: dotnet
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dotnet
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dotnet
+          servicePort: 8080
+---
